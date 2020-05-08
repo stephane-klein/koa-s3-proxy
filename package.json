@@ -1,0 +1,36 @@
+{
+  "name": "koa-s3-proxy",
+  "version": "0.1.0",
+  "description": "S3 proxy middleware for Koa",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephane-klein/koa-s3-proxy.git"
+  },
+  "keywords": [
+    "S3",
+    "Koa",
+    "Proxy",
+    "middleware"
+  ],
+  "author": "Stéphane Klein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephane-klein/koa-s3-proxy/issues"
+  },
+  "homepage": "https://github.com/stephane-klein/koa-s3-proxy#readme",
+  "dependencies": {
+    "mime": "^2.4.5",
+    "minio": "^7.0.16"
+  },
+  "devDependencies": {
+    "koa": "^2.11.0",
+    "koa-mount": "^4.0.0"
+  }
+}
