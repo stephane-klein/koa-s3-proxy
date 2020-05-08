@@ -15,13 +15,14 @@ $ npm install koa-s3-proxy
 ```
 const Koa = require('koa');
 const mount = require('koa-mount');
+const KoaS3ProxyServe = require('koa-s3-proxy');
 
 const app = new Koa();
 
 app.use(
     mount(
         '/attachments/',
-        serve({
+        KoaS3ProxyServe({
             endPoint: '127.0.0.1',
             port: 9000,
             useSSL: false,
