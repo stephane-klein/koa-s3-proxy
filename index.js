@@ -26,8 +26,9 @@ const serve = ({endPoint, port, useSSL, accessKey, secretKey, bucketName}) => {
     return async function serve(ctx, next) {
         await next();
         if (ctx.request.method === 'GET') {
+            var dataStream;
             try {
-                const dataStream = await minioClient.getObject(
+                dataStream = await minioClient.getObject(
                     bucketName,
                     ctx.request.url
                 );
