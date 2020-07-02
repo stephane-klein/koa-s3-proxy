@@ -24,7 +24,6 @@ const serve = ({endPoint, port, useSSL, accessKey, secretKey, bucketName}) => {
     ));
 
     return async function serve(ctx, next) {
-        await next();
         if (ctx.request.method === 'GET') {
             var dataStream;
             try {
@@ -48,6 +47,7 @@ const serve = ({endPoint, port, useSSL, accessKey, secretKey, bucketName}) => {
             );
             ctx.body = dataStream;
         }
+        await next();
     }
 };
 
