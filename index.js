@@ -25,16 +25,16 @@ const serve = ({endPoint, port, useSSL, accessKey, secretKey, bucketName}) => {
 
     return async function serve(ctx, next) {
         if (ctx.request.method === 'GET') {
-            var dataStream;
+            const fileInBucket = ctx.request.url.split('?')[0];
             try {
                 dataStream = await minioClient.getObject(
                     bucketName,
-                    ctx.request.url
+                    fileInBucket
                 );
             } catch (e) {
                 if (e.code === 'NoSuchKey') {
                     ctx.status = 404;
-                    ctx.body = `Error: ${ctx.request.url} not found`;
+                    ctx.body = `Error: ${fileInBucket} not found`;
                 } else {
                     ctx.status = 500;
                     ctx.body = `Internal Error: ${e.code}`;
@@ -43,7 +43,7 @@ const serve = ({endPoint, port, useSSL, accessKey, secretKey, bucketName}) => {
             }
             ctx.response.set(
                 'content-type',
-                mime.getType(ctx.request.url)
+                mime.getType(fileInBucket)
             );
             ctx.body = dataStream;
         }
