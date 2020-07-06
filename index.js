@@ -41,7 +41,7 @@ const serve = ({endPoint, port, useSSL, accessKey, secretKey, bucketName}) => {
                     ctx.status = 500;
                     ctx.body = `Internal Error: ${e.code}`;
                 }
-                return
+                return;
             }
             ctx.response.set(
                 'content-type',
