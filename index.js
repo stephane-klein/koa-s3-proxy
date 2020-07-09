@@ -2,6 +2,7 @@ const util = require('util');
 const assert = require('assert');
 const Minio = require('minio');
 const mime = require('mime');
+const { parse } = require('querystring');
 
 Minio.Client.prototype.getObject = util.promisify(Minio.Client.prototype.getObject);
 
@@ -25,9 +26,13 @@ const serve = ({endPoint, port, useSSL, accessKey, secretKey, bucketName}) => {
 
     return async function serve(ctx, next) {
         if (ctx.request.method === 'GET') {
-            const fileInBucket = ctx.request.url.split('?')[0];
-            let dataStream;
+            const splittedUrl = ctx.request.url.split('?');
+            const fileInBucket = splittedUrl[0];
+            const queryParams = splittedUrl.length > 1 ? parse(splittedUrl[1]) : {};
 
+            ctx.set('Content-Disposition', `${queryParams.contentDisposition ||  'attachment' }; filename="${queryParams.filename || fileInBucket}"`);
+
+            let dataStream;
             try {
                 dataStream = await minioClient.getObject(
                     bucketName,
