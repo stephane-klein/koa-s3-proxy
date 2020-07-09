@@ -51,3 +51,12 @@ $ node example.js
 ```
 
 Open your browser on http://127.0.0.1:3000/attachments/earth.png
+
+You can use `filename` query parameter to rename the filename:
+
+- http://127.0.0.1:3000/attachments/earth.png?filename=foobar.png
+
+You can put `inline` or `attachment` (default value) in `contentDisposition` query parameter to configure [Content-Disposition response header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition)
+
+- http://127.0.0.1:3000/attachments/earth.png?filename=foobar.png&contentDisposition=attachment
+- http://127.0.0.1:3000/attachments/earth.png?filename=foobar.png&contentDisposition=inline
